@@ -11,7 +11,7 @@ terraform {
     organization = "PhotoGlacier"
 
     workspaces {
-      name = "photo-glacier-iaas"
+      name = "secretsantaio-iaas"
     }
   }
 }
@@ -19,22 +19,4 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = var.region
-}
-
-provider "aws" {
-  alias = "us"
-  region = var.region_us
-}
-
-module "s3"{
-  source = "./storage"
-}
-
-module "auth" {
-  source = "./auth"
-  providers = {
-    aws = aws.us
-  }
-
-  photos_bucket_name = module.s3.photo_users_photos_bucket_name
 }
