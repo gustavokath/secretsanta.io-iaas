@@ -5,18 +5,13 @@ terraform {
       version = "~> 3.0"
     }
   }
-
-  backend "remote" {
-    hostname = "app.terraform.io"
-    organization = "PhotoGlacier"
-
-    workspaces {
-      name = "secretsantaio-iaas"
-    }
-  }
 }
 
 # Configure the AWS Provider
 provider "aws" {
   region = var.region
+}
+
+module "s3"{
+  source = "./storage"
 }
