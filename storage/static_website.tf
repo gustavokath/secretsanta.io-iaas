@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "secretsanta-website" {
-  bucket = "secretsanta.gkath.com"
+  bucket = var.website_bucket_name
   acl    = "public-read"
 
   website {
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "secretsanta-website" {
 }
 
 resource "aws_s3_bucket_policy" "secretsanta-website-policy" {
-  bucket = aws_s3_bucket.secretsanta-website.id
+  bucket = var.website_bucket_name
 
   policy = <<POLICY
 {
@@ -20,7 +20,7 @@ resource "aws_s3_bucket_policy" "secretsanta-website-policy" {
       "Effect": "Allow",
       "Principal": "*",
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${aws_s3_bucket.secretsanta-website.id}/*"
+      "Resource": "arn:aws:s3:::${var.website_bucket_name}/*"
     }
   ]
 }
