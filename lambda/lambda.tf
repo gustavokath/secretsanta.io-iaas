@@ -13,6 +13,12 @@ resource "aws_lambda_function" "secret_santa_lambda" {
     aws_iam_role_policy_attachment.secret_santa_lambda_logging_policy_attach,
     aws_cloudwatch_log_group.secretsanta_lambda_loggroup
   ]
+
+  environment {
+    variables = {
+      GMAIL_TOKEN = var.gmail_token
+    }
+  }
 }
 
 resource "aws_iam_role" "secret_santa_lambda_role" {
