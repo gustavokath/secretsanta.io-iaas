@@ -16,6 +16,7 @@ module "s3"{
   source = "./storage"
   website_bucket_name = var.website_bucket_name
   lambda_deploy_bucket_name = var.lambda_deploy_bucket_name
+  gmail_token = var.gmail_token
 }
 
 module "identity"{

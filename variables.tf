@@ -13,3 +13,8 @@ variable "website_bucket_name" {
 variable "lambda_deploy_bucket_name" {
   default = "secretsanta-lambda-deploy-bucket"
 }
+
+variable "gmail_token" {
+  default = ""
+  description = "Gmail user key"
+}

@@ -4,8 +4,9 @@ resource "aws_lambda_function" "secret_santa_lambda" {
   s3_bucket = var.lambda_deploy_bucket_name
   s3_key = "${var.secretsanta_lambda_version}/secretsanta.zip"
 
-  handler = "main.SecretSanta.run"
+  handler = "src/main.SecretSanta.run"
   runtime = "ruby2.7"
+  timeout = 120
 
   role = aws_iam_role.secret_santa_lambda_role.arn
 
