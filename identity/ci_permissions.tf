@@ -21,7 +21,9 @@ resource "aws_iam_policy" "ci-website-s3-deploy" {
       "Effect": "Allow",
       "Resource": [
         "arn:aws:s3:::${var.website_bucket_name}",
-        "arn:aws:s3:::${var.website_bucket_name}/*"
+        "arn:aws:s3:::${var.website_bucket_name}/*",
+        "arn:aws:s3:::${var.lambda_deploy_bucket_name}",
+        "arn:aws:s3:::${var.lambda_deploy_bucket_name}/*"
       ]
     }
   ]
