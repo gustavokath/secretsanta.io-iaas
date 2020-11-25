@@ -73,6 +73,13 @@ resource "aws_api_gateway_integration" "options_integration" {
    resource_id   = aws_api_gateway_resource.secret_santa_api_resource.id
    http_method   = aws_api_gateway_method.options_method.http_method
    type          = "MOCK"
+    request_templates = {
+    "application/json" = jsonencode(
+      {
+        statusCode = 200
+      }
+    )
+  }
    depends_on = [aws_api_gateway_method.options_method]
 }
 
