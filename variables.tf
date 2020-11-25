@@ -11,5 +11,5 @@ variable "website_bucket_name" {
 }
 
 variable "lambda_deploy_bucket_name" {
-  default = "secretsanta_lambda_deploy_bucket"
+  default = "secretsanta-lambda-deploy-bucket"
 }
