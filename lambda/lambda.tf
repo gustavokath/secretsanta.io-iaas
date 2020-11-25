@@ -7,7 +7,7 @@ resource "aws_lambda_function" "secret_santa_lambda" {
   handler = "main.SecretSanta.run"
   runtime = "ruby2.7"
 
-  role = aws_iam_role.secret_santa_lambda_role.name
+  role = aws_iam_role.secret_santa_lambda_role.arn
 
   depends_on = [
     aws_iam_role_policy_attachment.secret_santa_lambda_logging_policy_attach,
