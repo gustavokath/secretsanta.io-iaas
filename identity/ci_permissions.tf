@@ -36,6 +36,33 @@ resource "aws_iam_group_policy_attachment" "group-ci-s3-deploy-attach" {
   policy_arn = aws_iam_policy.ci-website-s3-deploy.arn
 }
 
+resource "aws_iam_policy" "ci-lmbda-update" {
+  name        = "ci-lambda-update"
+  description = "Permissions for CI update lambda code"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "lambda:UpdateFunctionCode"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:lambda:${var.aws_region}:030606588401:function:${var.secret_santa_lambda_name}"
+      ]
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_group_policy_attachment" "group-ci-lambda-update-attach" {
+  group      = aws_iam_group.group-ci.name
+  policy_arn = aws_iam_policy.ci-lmbda-update.arn
+}
+
 resource "aws_iam_user" "ci-user" {
   name = "ci"
 }

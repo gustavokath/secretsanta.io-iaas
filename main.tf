@@ -22,6 +22,8 @@ module "identity"{
   source = "./identity"
   website_bucket_name = var.website_bucket_name
   lambda_deploy_bucket_name = var.lambda_deploy_bucket_name
+  aws_region = var.region
+  secret_santa_lambda_name = module.lambda.secret_santa_lambda_name
 }
 
 module "lambda"{
