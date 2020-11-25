@@ -7,6 +7,7 @@ variable "secretsanta_lambda_version" {
 }
 
 variable "gmail_token" {
+  default = ""
   description = "Gmail user key"
 }
 
