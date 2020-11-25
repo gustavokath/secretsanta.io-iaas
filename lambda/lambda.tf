@@ -18,6 +18,7 @@ resource "aws_lambda_function" "secret_santa_lambda" {
   environment {
     variables = {
       GMAIL_TOKEN = var.gmail_token
+      AWS_REGION = var.aws_region
     }
   }
 }

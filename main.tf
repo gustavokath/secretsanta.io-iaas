@@ -28,6 +28,7 @@ module "lambda"{
   source = "./lambda"
   lambda_deploy_bucket_name = var.lambda_deploy_bucket_name
   gmail_token = var.gmail_token
+  aws_region = var.region
 }
 
 module "api_gateway"{
