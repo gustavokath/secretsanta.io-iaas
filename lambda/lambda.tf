@@ -68,6 +68,35 @@ resource "aws_iam_policy" "secret_santa_lambda_logging" {
 EOF
 }
 
+resource "aws_iam_role_policy_attachment" "secret_santa_lambda_sns_policy_attach" {
+  role       = aws_iam_role.secret_santa_lambda_role.name
+  policy_arn = aws_iam_policy.secret_santa_lambda_sns_sms_policy.arn
+}
+
+
+resource "aws_iam_policy" "secret_santa_lambda_sns_sms_policy" {
+  name        = "secret_santa_lambda_sns_sms_policy"
+  path        = "/"
+  description = "IAM policy for allowing to send from Secret Santa SMS"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "sns:Publish",
+        "sns:SetSMSAttributes",
+        "sns:GetSMSAttributes"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_cloudwatch_log_group" "secretsanta_lambda_loggroup" {
   name              = "/aws/lambda/${var.secretsanta_lambda_name}"
   retention_in_days = 14
