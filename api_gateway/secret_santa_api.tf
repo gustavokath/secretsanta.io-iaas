@@ -67,6 +67,21 @@ resource "aws_api_gateway_method_response" "options_200" {
     }
     depends_on = [aws_api_gateway_method.options_method]
 }
+resource "aws_api_gateway_method_response" "options_404" {
+   rest_api_id   = aws_api_gateway_rest_api.secret_santa_rest_api.id
+   resource_id   = aws_api_gateway_resource.secret_santa_api_resource.id
+   http_method   = aws_api_gateway_method.options_method.http_method
+   status_code   = "404"
+   response_models = {
+      "application/json" = "Empty"
+   }
+    response_parameters = {
+        "method.response.header.Access-Control-Allow-Headers" = true,
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin" = true
+    }
+    depends_on = [aws_api_gateway_method.options_method]
+}
 
 resource "aws_api_gateway_integration" "options_integration" {
    rest_api_id   = aws_api_gateway_rest_api.secret_santa_rest_api.id
@@ -88,6 +103,19 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
    resource_id   = aws_api_gateway_resource.secret_santa_api_resource.id
    http_method   = aws_api_gateway_method.options_method.http_method
    status_code   = aws_api_gateway_method_response.options_200.status_code
+   response_parameters = {
+      "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'",
+      "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'",
+      "method.response.header.Access-Control-Allow-Origin" = "'*'"
+   }
+    depends_on = [aws_api_gateway_method_response.options_200]
+}
+
+resource "aws_api_gateway_integration_response" "options_integration_404_response" {
+   rest_api_id   = aws_api_gateway_rest_api.secret_santa_rest_api.id
+   resource_id   = aws_api_gateway_resource.secret_santa_api_resource.id
+   http_method   = aws_api_gateway_method.options_method.http_method
+   status_code   = aws_api_gateway_method_response.options_404.status_code
    response_parameters = {
       "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'",
       "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'",
