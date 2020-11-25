@@ -11,6 +11,4 @@ variable "lambda_deploy_bucket_name" {}
 
 variable "gmail_token" {}
 
-variable "aws_region" {}
-
 
