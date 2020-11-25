@@ -25,7 +25,7 @@ resource "aws_lambda_function" "secret_santa_lambda" {
 resource "aws_iam_role" "secret_santa_lambda_role" {
   name = "secret_santa_lambda_role"
 
-  assume_role_policy = "${data.aws_iam_policy_document.secret_santa_lambda_assume_role_policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.secret_santa_lambda_assume_role_policy.json
 }
 
 data "aws_iam_policy_document" "secret_santa_lambda_assume_role_policy" {
