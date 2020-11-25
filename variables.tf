@@ -9,3 +9,7 @@ variable "region_us"{
 variable "website_bucket_name" {
   default = "secretsanta.gkath.com"
 }
+
+variable "lambda_deploy_bucket_name" {
+  default = "secretsanta_lambda_deploy_bucket"
+}

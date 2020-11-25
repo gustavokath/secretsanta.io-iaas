@@ -19,7 +19,10 @@ resource "aws_iam_policy" "ci-website-s3-deploy" {
         "s3:PutObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::${var.website_bucket_name}"
+      "Resource": [
+        "arn:aws:s3:::${var.website_bucket_name}",
+        "arn:aws:s3:::${var.website_bucket_name}/*"
+      ]
     }
   ]
 }
