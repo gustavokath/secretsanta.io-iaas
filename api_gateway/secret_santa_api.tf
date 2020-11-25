@@ -22,7 +22,7 @@ resource "aws_api_gateway_integration" "secret_santa_api_integration" {
 
    integration_http_method = "POST"
    type                    = "AWS_PROXY"
-   uri                     = var.lambda_invoke_arn
+   uri                     = var.secret_santa_lambda_invoke_arn
 }
 
 resource "aws_api_gateway_deployment" "secret_santa_api_deployment" {

@@ -7,7 +7,7 @@ resource "aws_lambda_function" "secret_santa_lambda" {
   handler = "main.SecretSanta.run"
   runtime = "ruby2.7"
 
-  role = aws_iam_role.secret_santa_lambda_role
+  role = aws_iam_role.secret_santa_lambda_role.name
 
   depends_on = [
     aws_iam_role_policy_attachment.secret_santa_lambda_logging_policy_attach,
@@ -67,7 +67,7 @@ resource "aws_cloudwatch_log_group" "secretsanta_lambda_loggroup" {
 }
 
 output "secret_santa_lambda_invoke_arn" {
-  value = aws_lambda_function.secret_santa_lambda.invoke_url
+  value = aws_lambda_function.secret_santa_lambda.invoke_arn
 }
 
 output "secret_santa_lambda_name" {
